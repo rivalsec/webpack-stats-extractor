@@ -41,10 +41,9 @@ def process_file(name:str, source:str, dir:str = None):
 
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        description='Extract modules source code from Angular (WebPack bundle statistics) stats.json files (https://webpack.js.org/api/stats/)`')
+        description='Extract modules source code from Angular (WebPack bundle statistics) stats.json files (https://webpack.js.org/api/stats/)')
     parser.add_argument('file', nargs='+', help='webpack stats json file(s)')
     parser.add_argument('-d', type=str, help='If set, store files to this directory (with dir structure) else all sources go to stdout')
-
 
     args = parser.parse_args()
 
