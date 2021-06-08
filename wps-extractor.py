@@ -24,13 +24,13 @@ def extract(var):
                         yield result
 
 
-def process_file(name:str, source:str, dir:str = None):
+def process_file(bundle_file:str, name:str, source:str, dir:str = None):
     if not dir:
-        print(f"##### {name} #####\n\n")
+        print(f"##### {bundle_file} {name} #####\n\n")
         print(source)
         print("\n\n")    
     else:
-        file_path = dir.rstrip(r'\/') + os.path.sep + name.lstrip(r'.\/')
+        file_path = dir.rstrip(r'\/') + os.path.sep + bundle_file + os.path.sep + name.lstrip(r'.\/')
         dir_path = os.path.dirname(file_path)
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
@@ -52,13 +52,13 @@ def main():
             print (f"Directory {args.d} not exists!")
             return
 
-    for f in args.file:
+    for bundle_file in args.file:
         stats_obj = None
-        with open(f , "r") as f:
+        with open(bundle_file , "r") as f:
             stats_obj = json.load(f)
 
         for n, s in extract(stats_obj):
-            process_file(n, s, args.d)
+            process_file(bundle_file, n, s, args.d)
 
 if __name__ == "__main__":
     main()
