@@ -34,9 +34,17 @@ def process_file(bundle_file:str, name:str, source:str, dir:str = None):
         dir_path = os.path.dirname(file_path)
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
-        with open(file_path, 'w') as f:
-            print(f'{file_path}')
-            f.write(source)
+        if type(source) is dict:
+            #bytes
+            source_bytes = bytes(bytearray(source.values()))
+            with open(file_path, 'wb') as f:
+                print(f'{file_path}')
+                f.write(source_bytes)
+        else:
+            #txt
+            with open(file_path, 'w') as f:
+                print(f'{file_path}')
+                f.write(source)
 
 
 def main():
